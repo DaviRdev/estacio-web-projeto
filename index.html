@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+
+<head>
+  <meta charset="UFT-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmes</title>
+
+  
+ 
+  <style>
+     *{
+     margin: 0;
+     padding: 0;
+     font-family: Arial Arial, Helvetica, sans-serif;
+    
+    }  
+    h1.tittle {
+      background-color: rgb(12, 12, 12);
+    color: beige;
+    padding: 10px;
+   }   
+  
+    form{
+      margin: 10px;
+      padding:10px;
+      border: 1px solid #333;
+      border-radius: 20px;
+      display: flex;
+    }
+  
+    form input{
+      padding: 5px;
+      border: none;
+      outline: none;
+      flex: 1;
+    }
+ 
+    form button {
+        padding: 5px 10px;
+        background-color: rgb(7, 7, 7);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+ 
+    form button:hover{
+      background-color: red;
+    }
+    
+    
+    div.lista{
+        margin-top: 10px;
+        padding: 5px;
+        display: flex;
+
+    }
+    div.item{
+      text-align: center;
+      padding: 10px;
+      width: 200px;
+      border: 2px solid red;
+      border:2px solid red;
+      border-radius: 5px;
+      margin: 5px;
+    
+    }
+ 
+    div.item:hover {
+         background-color: red;
+         cursor: pointer;
+     }
+    
+    
+    div.item img{
+       width: 200px;
+    }
+ 
+ </style>
+
+
+</head>
+
+<body>
+  <h1 class="tittle"     >Filmes</h1>
+  <form>
+    <input id="pesquisa" placeholder="Digite o nome do filme" />
+    <button>Pesquisar</button>
+  </form>
+  <div class="lista">
+
+    <div class="item">
+      <a href="https://www.youtube.com/watch?v=iAZ_KJfZfBQ" target="_blank">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/pt/thumb/5/59/Superman_Returns_poster.jpg/230px-Superman_Returns_poster.jpg" />
+        <h2>Superman Returns</h2>
+        
+      </a>
+      
+      </div>
+    
+      <div class="item">
+      
+        <a href="https://www.youtube.com/watch?v=rsQEor4y2hg" target="_blank">
+         
+        <img
+        src="https://upload.wikimedia.org/wikipedia/pt/thumb/3/38/The_Batman_poster.jpg/250px-The_Batman_poster.jpg" />
+        <h2>The Batman</h2>
+      
+      </a>
+      </div>
+
+  </div>
+  <script>
+     
+     const frmPesquisa = document.querySelector("form");
+  
+  
+     frmPesquisa.onsubmit =(ev) =>{
+       ev.preventDefault();
+       
+     
+       const pesquisa = ev.target.pesquisa.value;
+      
+       if(pesquisa == "") {
+         alert("Preecha o Campo!")
+         return;
+        }
+      
+        fetch(`https://www.movieposterdb.com/search?q=batman&imdb=0`)
+             .then(result => result.json ())
+             .then(json => carregaLista(json));
+      
+     
+     }
+        const carregarLista = (json) => {
+           const lista = document.querySelector("div.lista");
+           lista.innerHTML = "";
+
+        json.Search.forEach(element=> {
+            console.log(element);
+          });
+
+      }
+
+        
+
+      
+
+
+  </script>
+  
+
+</body>
+
+</html>
